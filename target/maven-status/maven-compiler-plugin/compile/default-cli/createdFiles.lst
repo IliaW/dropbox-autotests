@@ -1,0 +1,17 @@
+com\dropbox\managers\DataManager.class
+com\dropbox\pages\SignInPage.class
+com\dropbox\pages\HomePage.class
+com\dropbox\pages\Page.class
+com\dropbox\menu\AccountMenu.class
+com\dropbox\pages\FilesPage.class
+com\dropbox\Launcher.class
+com\dropbox\popups\CreateFolderPopup.class
+com\dropbox\menu\Menu.class
+com\dropbox\pages\PaperPage.class
+com\dropbox\managers\PageManager.class
+com\dropbox\menu\CreateNewFileMenu.class
+com\dropbox\pages\FileRequestsPage.class
+com\dropbox\pages\SharedPage.class
+com\dropbox\pages\TransferPage.class
+com\dropbox\popups\PopUp.class
+com\dropbox\pages\DeletedFilesPage.class
