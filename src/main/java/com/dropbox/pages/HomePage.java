@@ -20,8 +20,8 @@ public class HomePage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    setExplicitWaitBySeconds(8);
-    boolean status = isDisplayed(HOME_HEADER) && wd.getTitle().equals(HOME_TITLE_TEXT);
+    setExplicitWaitBySeconds(10);
+    boolean status = isDisplayed(HOME_HEADER) & wd.getTitle().equals(HOME_TITLE_TEXT);
     setExplicitWaitBySeconds(4);
     return status;
   }

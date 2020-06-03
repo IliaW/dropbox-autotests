@@ -1,0 +1,25 @@
+{
+  "uuid": "c713c69b-b5a0-472e-a9f3-6d91db4dac98",
+  "name": "com.dropbox.tests.SignInTests.setUpBeforeTest",
+  "children": [
+    "31f7d55c-b680-4c30-a389-cccddb2f9e9c"
+  ],
+  "description": "",
+  "befores": [
+    {
+      "name": "setUpBeforeTest",
+      "status": "passed",
+      "stage": "finished",
+      "description": "",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1591114997671,
+      "stop": 1591115015285
+    }
+  ],
+  "afters": [],
+  "links": [],
+  "start": 1591114997671,
+  "stop": 1591115015286
+}

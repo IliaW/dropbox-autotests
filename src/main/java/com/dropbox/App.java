@@ -5,6 +5,7 @@ import com.dropbox.pages.*;
 import com.dropbox.pages.menus.AccountMenu;
 import com.dropbox.pages.menus.ContextMenu;
 import com.dropbox.pages.menus.CreateNewFileMenu;
+import com.dropbox.pages.other.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -33,6 +34,9 @@ public class App {
   public static ContextMenu contextMenu;
   public static CreateNewFileMenu createNewFileMenu;
 
+  // Other features
+  public static Search search;
+
   // Helpers
   public static NavigationHelper open;
 
@@ -60,6 +64,7 @@ public class App {
     contextMenu = new ContextMenu(driver, wait);
     createNewFileMenu = new CreateNewFileMenu(driver, wait);
 
+    search = new Search(driver, wait);
     open = new NavigationHelper();
   }
 

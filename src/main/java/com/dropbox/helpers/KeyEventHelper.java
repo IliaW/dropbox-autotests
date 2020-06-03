@@ -37,7 +37,7 @@ public class KeyEventHelper {
     robot.keyRelease(KeyEvent.VK_CONTROL);
   }
 
-  private void clickEnter() {
+  public void clickEnter() {
     robot.keyPress(KeyEvent.VK_ENTER);
     robot.keyRelease(KeyEvent.VK_ENTER);
   }

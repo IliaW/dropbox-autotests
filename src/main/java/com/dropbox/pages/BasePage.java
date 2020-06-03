@@ -75,7 +75,7 @@ public abstract class BasePage {
     wd.navigate().refresh();
   }
 
-  public List<File> getListOfAllFilesOnPage() {
+  public List<File> getListOfAllFilesOnPageWithAttributes() {
     List<WebElement> listOfWebElements = findAll("//tbody[contains(@class,'table-body mc-table-body-culled')]//tr");
     List<File> filesList = new ArrayList<>();
     if (listOfWebElements.size() != 0) {
@@ -86,8 +86,8 @@ public abstract class BasePage {
     return filesList;
   }
 
-  public int countOfUploadedFilesOnPage() {
-    return getListOfAllFilesOnPage().size();
+  public int getCountOfFilesInList() {
+    return findAll("//tbody[contains(@class,'table-body mc-table-body-culled')]//tr").size();
   }
 
   // Wait
@@ -120,10 +120,8 @@ public abstract class BasePage {
     }
   }
 
-  // "sleep" method. Use only during tests developing.
   public static void waitFor(int ms) {
     try {
-      System.out.println("Using waitFor method");
       Thread.sleep(ms);
     } catch (InterruptedException e) {
       e.printStackTrace();

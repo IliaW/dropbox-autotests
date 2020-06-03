@@ -49,7 +49,7 @@ public class SignInTests extends Launcher {
   @Test(dataProvider = "invalidAuthorizationData")
   public void signInWithInvalidData(User invalidUser, String expectedErrorMessage) {
     signInPage.signInAs(invalidUser);
-    signInPage.setImplicitWaitBySeconds(8);
+    signInPage.setImplicitWaitBySeconds(10);
     assertThat(expectedErrorMessage).isEqualTo(signInPage.getActualErrorMessage());
     signInPage.setImplicitWaitBySeconds(4);
   }

@@ -16,6 +16,6 @@ public class SharedPage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(SHARED_HEADER) && wd.getTitle().equals(SHARED_TITLE_TEXT);
+    return isDisplayed(SHARED_HEADER) & wd.getTitle().equals(SHARED_TITLE_TEXT);
   }
 }

@@ -16,6 +16,6 @@ public class DeletedFilesPage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(DELETED_FILES_HEADER) && wd.getTitle().equals(DELETED_FILES_TITLE_TEXT);
+    return isDisplayed(DELETED_FILES_HEADER) & wd.getTitle().equals(DELETED_FILES_TITLE_TEXT);
   }
 }

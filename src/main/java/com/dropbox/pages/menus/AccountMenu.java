@@ -19,7 +19,7 @@ public class AccountMenu extends BasePage implements Menu {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(SETTINGS_BUTTON) && isDisplayed(SIGN_OUT_BUTTON);
+    return isDisplayed(SETTINGS_BUTTON) & isDisplayed(SIGN_OUT_BUTTON);
   }
 
   @Override

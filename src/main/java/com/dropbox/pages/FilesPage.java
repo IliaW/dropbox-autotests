@@ -30,7 +30,7 @@ public class FilesPage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(DROPBOX_HEADER) && wd.getTitle().equals(FILES_TITLE_TEXT);
+    return isDisplayed(DROPBOX_HEADER) & wd.getTitle().equals(FILES_TITLE_TEXT);
   }
 
   public void uploadFile(File file) {
@@ -62,7 +62,6 @@ public class FilesPage extends BasePage {
   public void selectItemFromList(String name) {
     click("//span[text() = '" + name + "']/ancestor::tr");
   }
-
 
   // replace to File or FilesPage
   public void setCheckboxOnItemFromList(String name) {

@@ -23,7 +23,7 @@ public class CreateNewFileMenu extends BasePage implements Menu {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(WORD_DOCUMENT_BUTTON) && isDisplayed(GOOGLE_DOCS_BUTTON);
+    return isDisplayed(WORD_DOCUMENT_BUTTON) & isDisplayed(GOOGLE_DOCS_BUTTON);
   }
 
   @Override

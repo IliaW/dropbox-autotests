@@ -17,7 +17,7 @@ public class ContextMenu extends BasePage implements Menu {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(STAR_BUTTON) && isDisplayed(DELETE_BUTTON);
+    return isDisplayed(STAR_BUTTON) & isDisplayed(DELETE_BUTTON);
   }
 
   @Override

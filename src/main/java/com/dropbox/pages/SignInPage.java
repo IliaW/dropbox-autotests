@@ -25,7 +25,7 @@ public class SignInPage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    return isDisplayed(SIGN_IN_HEADER) && wd.getTitle().equals(LOGIN_TITLE_TEXT);
+    return isDisplayed(SIGN_IN_HEADER) & wd.getTitle().equals(LOGIN_TITLE_TEXT);
   }
 
   public void signInAs(User user) {
