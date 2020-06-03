@@ -5,6 +5,7 @@ import com.dropbox.pages.*;
 import com.dropbox.pages.menus.AccountMenu;
 import com.dropbox.pages.menus.ContextMenu;
 import com.dropbox.pages.menus.CreateNewFileMenu;
+import com.dropbox.pages.modal.windows.DeleteModalWindow;
 import com.dropbox.pages.other.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -33,6 +34,9 @@ public class App {
   public static AccountMenu accountMenu;
   public static ContextMenu contextMenu;
   public static CreateNewFileMenu createNewFileMenu;
+
+  // Modal Windows
+  public static DeleteModalWindow deleteMW;
 
   // Other features
   public static Search search;
@@ -63,6 +67,8 @@ public class App {
     accountMenu = new AccountMenu(driver, wait);
     contextMenu = new ContextMenu(driver, wait);
     createNewFileMenu = new CreateNewFileMenu(driver, wait);
+
+    deleteMW = new DeleteModalWindow(driver,wait);
 
     search = new Search(driver, wait);
     open = new NavigationHelper();

@@ -3,9 +3,9 @@
 <suite name="Suite2" verbose="1">
     <test name="FilesTests">
         <classes>
-            <class name="com.dropbox.tests.UploadFilesTests"/>
-            <class name="com.dropbox.tests.CreatingFilesTests"/>
-            <class name="com.dropbox.tests.DeletingFilesTests"/>
+            <class name="com.dropbox.tests.UploadFileTests"/>
+            <class name="com.dropbox.tests.CreateFileTests"/>
+            <class name="com.dropbox.tests.DeleteFileTests"/>
         </classes>
     </test>
 </suite>

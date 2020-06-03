@@ -47,7 +47,10 @@ public class SignInPage extends BasePage {
   // Check
   public String getActualErrorMessage() {
     try {
-      return find(ERROR_MESSAGE).getText();
+      setImplicitWaitBySeconds(10);
+      String error = find(ERROR_MESSAGE).getText();
+      setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+      return error;
     } catch (NoSuchElementException e) {
       e.printStackTrace();
       return null;

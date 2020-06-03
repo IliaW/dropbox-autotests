@@ -1,7 +1,7 @@
 package com.dropbox.pages.other;
 
 import com.dropbox.helpers.KeyEventHelper;
-import com.dropbox.model.File;
+import com.dropbox.model.DropboxFile;
 import com.dropbox.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +39,7 @@ public class Search extends BasePage {
     waitFor(3000);
   }
 
-  public int counterReading() {
+  public int counterOfSearchResults() {
     String[] array = find(COUNT_OF_RESULTS).getText().split(" ");
     return parseInt(array[0]);
   }
@@ -51,9 +51,9 @@ public class Search extends BasePage {
 
   public boolean resultsContain(String request) {
     setImplicitWaitBySeconds(0);
-    List<File> files = getListOfAllFilesOnPageWithAttributes();
+    List<DropboxFile> dropboxFiles = getListOfAllFilesOnPage();
     setImplicitWaitBySeconds(4);
-    for (File resultOfSearch : files) {
+    for (DropboxFile resultOfSearch : dropboxFiles) {
       if(!resultOfSearch.getName().toLowerCase().contains(request.toLowerCase())){
         return false;
       }

@@ -1,10 +1,12 @@
 package com.dropbox.pages;
 
 import com.dropbox.helpers.KeyEventHelper;
+import com.dropbox.model.DropboxFile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.util.List;
 
 public class FilesPage extends BasePage {
 
@@ -15,11 +17,11 @@ public class FilesPage extends BasePage {
   private final String UPLOAD_FILES_BUTTON = "//div[text() = 'Upload files']";
   private final String UPLOAD_FOLDER_BUTTON = "//div[text() = 'Upload folder']";
   private final String NEW_FOLDER_BUTTON = "//div[text() = 'New folder']";
-  private final String SHARE_BUTTON = "//";
-  private final String OPEN_BUTTON = "//";
-  private final String DOWNLOAD_BUTTON = "//";
+  private final String SELECT_ALL_CHECKBOX = "//input[@aria-label = 'Select all']";
   private final String UPLOADING_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploading')]";
   private final String UPLOADED_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploaded')]";
+  private final String DELETING_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Deleting')]]";
+  private final String DELETED_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Deleted')]]";
 
   private final KeyEventHelper keyEventHelper;
 
@@ -33,38 +35,44 @@ public class FilesPage extends BasePage {
     return isDisplayed(DROPBOX_HEADER) & wd.getTitle().equals(FILES_TITLE_TEXT);
   }
 
-  public void uploadFile(File file) {
-    click(UPLOAD_FILES_BUTTON);
-    keyEventHelper.uploadFileFromWindowsOS(file);
-    if (isDisplayed(UPLOADING_SNACKBAR)) {
-      setExplicitWaitBySeconds(15);
-      isDisplayed(UPLOADED_SNACKBAR);
-      setExplicitWaitBySeconds(4);
-      refreshPage();
+  public void uploadFiles(File... file) {
+    for (File f : file) {
+      click(UPLOAD_FILES_BUTTON);
+      keyEventHelper.uploadFileFromWindowsOS(f);
+      execution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
     }
+    refreshPage();
   }
 
   public void uploadFolder(File folder) {
     click(UPLOAD_FOLDER_BUTTON);
     keyEventHelper.uploadFolderFromWindowsOS(folder);
-    if (isDisplayed(UPLOADING_SNACKBAR)) {
-      setExplicitWaitBySeconds(15);
-      isDisplayed(UPLOADED_SNACKBAR);
-      setExplicitWaitBySeconds(4);
-      refreshPage();
+    execution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
+    refreshPage();
+  }
+
+  public void selectAllFilesWhichContainText(String text) {
+    List<DropboxFile> list = getListOfAllFilesOnPage();
+    for (DropboxFile file : list) {
+      if (file.getName().contains(text)) {
+        setCheckbox(file.getCheckboxLocator());
+      }
     }
+  }
+
+  public void selectAllFiles() {
+    setCheckbox(SELECT_ALL_CHECKBOX);
   }
 
   public void createNewFolder() {
     click(NEW_FOLDER_BUTTON);
   }
 
-  public void selectItemFromList(String name) {
-    click("//span[text() = '" + name + "']/ancestor::tr");
-  }
-
-  // replace to File or FilesPage
-  public void setCheckboxOnItemFromList(String name) {
-    click("//span[text() = '" + name + "']/ancestor::tr//input[@type = 'checkbox']");
+  private void execution(String processing, String finish) {
+    if (isDisplayed(processing)) {
+      setExplicitWaitBySeconds(15);
+      isDisplayed(finish);
+      setExplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+    }
   }
 }

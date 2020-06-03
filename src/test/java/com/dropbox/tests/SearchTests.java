@@ -28,7 +28,7 @@ public class SearchTests extends Launcher {
   @Test
   public void resultCounter() {
     search.byText("jpg");
-    assertThat(search.counterReading()).isEqualTo(search.getCountOfFilesInList());
+    assertThat(search.counterOfSearchResults()).isEqualTo(search.getCountOfFilesInList());
   }
 
   @Test
@@ -41,7 +41,7 @@ public class SearchTests extends Launcher {
   @Test
   public void noResultsFound() {
     search.byText("&&&");
-    assertThat(search.counterReading()).isEqualTo(0);
+    assertThat(search.counterOfSearchResults()).isEqualTo(0);
     assertThat(search.noResultsFoundDisplay()).isTrue();
   }
 }

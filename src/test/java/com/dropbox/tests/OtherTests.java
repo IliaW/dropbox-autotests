@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class OtherTests extends Launcher {
 
   @Test
-  public void dragAndDropFileToFolder(){
+  public void dragAndDropFileToFolder() {
 
   }
 }

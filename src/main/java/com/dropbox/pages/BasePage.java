@@ -1,6 +1,6 @@
 package com.dropbox.pages;
 
-import com.dropbox.model.File;
+import com.dropbox.model.DropboxFile;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +22,9 @@ public abstract class BasePage {
   protected WebDriver wd;
   protected WebDriverWait wait;
   private final Actions make;
+  protected final int DEFAULT_IMPLICIT_WAIT = 4;
+
+  private final String FILE_ROW = "//tbody[contains(@class,'table-body mc-table-body-culled')]//tr";
 
   public BasePage(WebDriver wd, WebDriverWait wait) {
     this.wd = wd;
@@ -65,6 +68,12 @@ public abstract class BasePage {
     }
   }
 
+  public void setCheckbox(WebElement locator) {
+    if (!locator.isSelected()) {
+      locator.click();
+    }
+  }
+
   public void resetCheckbox(String locator) {
     if (find(locator).isSelected()) {
       click(locator);
@@ -75,19 +84,22 @@ public abstract class BasePage {
     wd.navigate().refresh();
   }
 
-  public List<File> getListOfAllFilesOnPageWithAttributes() {
-    List<WebElement> listOfWebElements = findAll("//tbody[contains(@class,'table-body mc-table-body-culled')]//tr");
-    List<File> filesList = new ArrayList<>();
+  public List<DropboxFile> getListOfAllFilesOnPage() {
+    List<WebElement> listOfWebElements = findAll(FILE_ROW);
+    List<DropboxFile> filesList = new ArrayList<>();
     if (listOfWebElements.size() != 0) {
       for (WebElement file : listOfWebElements) {
-        filesList.add(new File(file));
+        filesList.add(new DropboxFile(file));
       }
     }
     return filesList;
   }
 
   public int getCountOfFilesInList() {
-    return findAll("//tbody[contains(@class,'table-body mc-table-body-culled')]//tr").size();
+    setImplicitWaitBySeconds(1);
+    int count = findAll(FILE_ROW).size();
+    setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+    return count;
   }
 
   // Wait

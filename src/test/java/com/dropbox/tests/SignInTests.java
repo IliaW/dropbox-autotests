@@ -2,7 +2,9 @@ package com.dropbox.tests;
 
 import com.dropbox.Launcher;
 import com.dropbox.model.User;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
 import static com.dropbox.model.UserType.BASIC_USER;
@@ -11,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SignInTests extends Launcher {
 
   @DataProvider
-  public static Object[][] invalidAuthorizationData() {
+  public Object[][] invalidAuthorizationData() {
     return new Object[][]{
             {new User("", ""),
                     "Please enter your email"},
@@ -49,9 +51,7 @@ public class SignInTests extends Launcher {
   @Test(dataProvider = "invalidAuthorizationData")
   public void signInWithInvalidData(User invalidUser, String expectedErrorMessage) {
     signInPage.signInAs(invalidUser);
-    signInPage.setImplicitWaitBySeconds(10);
     assertThat(expectedErrorMessage).isEqualTo(signInPage.getActualErrorMessage());
-    signInPage.setImplicitWaitBySeconds(4);
   }
 
   @Test(enabled = false)
