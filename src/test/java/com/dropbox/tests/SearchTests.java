@@ -15,7 +15,7 @@ public class SearchTests extends Launcher {
   public void setUpBeforeClass() {
     if (!accountMenu.isUserAuthorized()) {
       open.signInPage();
-      signInPage.signInAs(BASIC_USER);
+      signInPage.signInWithCookies();
       assertThat(homePage.isLoaded()).isTrue();
     }
   }

@@ -14,7 +14,7 @@ public class SignOutTests extends Launcher {
   public void setUpBeforeTest() {
     if (!accountMenu.isUserAuthorized()) {
       open.signInPage();
-      signInPage.signInAs(BASIC_USER);
+      signInPage.signInWithCookies();
       assertThat(homePage.isLoaded()).isTrue();
     }
   }

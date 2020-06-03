@@ -1,10 +1,13 @@
 package com.dropbox.pages;
 
 import com.dropbox.model.User;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static com.dropbox.data.CookiesData.*;
 
 public class SignInPage extends BasePage {
 
@@ -28,11 +31,19 @@ public class SignInPage extends BasePage {
     return isDisplayed(SIGN_IN_HEADER) & wd.getTitle().equals(LOGIN_TITLE_TEXT);
   }
 
-  public void signInAs(User user) {
-    enter(user.getLogin(), into(EMAIL_FIELD));
-    enter(user.getPass(), into(PASSWORD_FIELD));
-    click(SIGN_IN_BUTTON);
+  public void signInWithCookies() {
+    for (Cookie c : cookies) {
+      wd.manage().addCookie(c);
+    }
+    refreshPage();
   }
+
+//  Not working yet.
+//  public void signInAs(User user) {
+//    enter(user.getLogin(), into(EMAIL_FIELD));
+//    enter(user.getPass(), into(PASSWORD_FIELD));
+//    click(SIGN_IN_BUTTON);
+//  }
 
   public SignInPage setRememberMeCheckbox() {
     setCheckbox(REMEMBER_ME_CHECKBOX);
