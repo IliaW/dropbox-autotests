@@ -35,6 +35,7 @@ public class Search extends BasePage {
     click(SEARCH_FIELD);
     this.isLoaded();
     enter(text, into(SEARCH_FIELD));
+    waitFor(1000);
     keyEventHelper.clickEnter();
     waitFor(3000);
   }

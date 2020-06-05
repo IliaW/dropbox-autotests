@@ -2,13 +2,12 @@ package com.dropbox.tests;
 
 import com.dropbox.Launcher;
 import com.dropbox.model.User;
-import com.dropbox.model.UserType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
-import static com.dropbox.model.UserType.BASIC_USER;
+import static com.dropbox.model.UserType.BASIC_USER_QA_VOVK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignInTests extends Launcher {
@@ -21,7 +20,7 @@ public class SignInTests extends Launcher {
    */
 
   @DataProvider
-  public Object[][] invalidAuthorizationData() {
+  public Object[][] incorrectAuthorizationCredential() {
     return new Object[][]{
             {new User("", ""),
                     "Please enter your email"},
@@ -50,35 +49,29 @@ public class SignInTests extends Launcher {
     open.signInPage();
   }
 
-  @Test
-  public void signInWithCookie() {
-    signInPage.signInWithCookies();
+  @Test()
+  public void signIn() {
+    signInPage.signInAs(BASIC_USER_QA_VOVK);
     assertThat(homePage.isLoaded()).isTrue();
   }
 
-//  @Test
-//  public void signIn() {
-//    signInPage.signInAs(BASIC_USER);
-//    assertThat(homePage.isLoaded()).isTrue();
-//  }
-//
-//  @Test(enabled = false, dataProvider = "invalidAuthorizationData")
-//  public void signInWithInvalidData(User invalidUser, String expectedErrorMessage) {
-//    signInPage.signInAs(invalidUser);
-//    assertThat(expectedErrorMessage).isEqualTo(signInPage.getActualErrorMessage());
-//  }
-//
-//  @Test(enabled = false)
-//  public void signInWithRememberMeCheckbox() {
-//    signInPage.setRememberMeCheckbox()
-//            .signInAs(BASIC_USER);
-//    //TODO
-//  }
-//
-//  @Test(enabled = false)
-//  public void signInWithoutRememberMeCheckbox() {
-//    signInPage.resetRememberMeCheckbox()
-//            .signInAs(BASIC_USER);
-//    // TODO
-//  }
+  @Test(dataProvider = "incorrectAuthorizationCredential")
+  public void signInWithIncorrectCredential(User invalidUser, String expectedErrorMessage) {
+    signInPage.signInAs(invalidUser);
+    assertThat(expectedErrorMessage).isEqualTo(signInPage.getActualErrorMessage());
+  }
+
+  @Test(enabled = false)
+  public void signInWithRememberMeCheckbox() {
+    signInPage.setRememberMeCheckbox()
+            .signInAs(BASIC_USER_QA_VOVK);
+    //TODO
+  }
+
+  @Test(enabled = false)
+  public void signInWithoutRememberMeCheckbox() {
+    signInPage.resetRememberMeCheckbox()
+            .signInAs(BASIC_USER_QA_VOVK);
+    // TODO
+  }
 }

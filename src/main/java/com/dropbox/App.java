@@ -10,6 +10,7 @@ import com.dropbox.pages.other.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,7 @@ public class App {
   public static CreateNewFileMenu createNewFileMenu;
 
   // Modal Windows
-  public static DeleteModalWindow deleteMW;
+  public static DeleteModalWindow deleteModalWindow;
 
   // Other features
   public static Search search;
@@ -44,12 +45,12 @@ public class App {
   // Helpers
   public static NavigationHelper open;
 
-  public void init(String browserType) {
-    switch (browserType) {
-      case (CHROME):
+  public void init(String browser) {
+    switch (browser) {
+      case CHROME:
         driver = new ChromeDriver();
         break;
-      case (FIREFOX):
+      case FIREFOX:
         driver = new FirefoxDriver();
         break;
     }
@@ -68,7 +69,7 @@ public class App {
     contextMenu = new ContextMenu(driver, wait);
     createNewFileMenu = new CreateNewFileMenu(driver, wait);
 
-    deleteMW = new DeleteModalWindow(driver,wait);
+    deleteModalWindow = new DeleteModalWindow(driver,wait);
 
     search = new Search(driver, wait);
     open = new NavigationHelper();
@@ -78,12 +79,4 @@ public class App {
     driver.quit();
     driver = null;
   }
-
-//  File tempFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-//try {
-//    Files.copy(tempFile, new File("screen.png"));
-//  } catch (IOException e) {
-//    e.printStackTrace();
-//  }
-
 }

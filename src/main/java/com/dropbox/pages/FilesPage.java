@@ -17,11 +17,9 @@ public class FilesPage extends BasePage {
   private final String UPLOAD_FILES_BUTTON = "//div[text() = 'Upload files']";
   private final String UPLOAD_FOLDER_BUTTON = "//div[text() = 'Upload folder']";
   private final String NEW_FOLDER_BUTTON = "//div[text() = 'New folder']";
-  private final String SELECT_ALL_CHECKBOX = "//input[@aria-label = 'Select all']";
+  private final String SELECT_ALL_CHECKBOX = "//tr[@class = 'mc-table-row mc-table-head-row']//label";
   private final String UPLOADING_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploading')]";
   private final String UPLOADED_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploaded')]";
-  private final String DELETING_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Deleting')]]";
-  private final String DELETED_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Deleted')]]";
 
   private final KeyEventHelper keyEventHelper;
 
@@ -35,11 +33,12 @@ public class FilesPage extends BasePage {
     return isDisplayed(DROPBOX_HEADER) & wd.getTitle().equals(FILES_TITLE_TEXT);
   }
 
-  public void uploadFiles(File... file) {
-    for (File f : file) {
+  public void uploadFiles(File... files) {
+    for (File file : files) {
       click(UPLOAD_FILES_BUTTON);
-      keyEventHelper.uploadFileFromWindowsOS(f);
-      execution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
+      waitFor(500);
+      keyEventHelper.uploadFileFromWindowsOS(file);
+      actionExecution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
     }
     refreshPage();
   }
@@ -47,7 +46,7 @@ public class FilesPage extends BasePage {
   public void uploadFolder(File folder) {
     click(UPLOAD_FOLDER_BUTTON);
     keyEventHelper.uploadFolderFromWindowsOS(folder);
-    execution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
+    actionExecution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
     refreshPage();
   }
 
@@ -55,24 +54,16 @@ public class FilesPage extends BasePage {
     List<DropboxFile> list = getListOfAllFilesOnPage();
     for (DropboxFile file : list) {
       if (file.getName().contains(text)) {
-        setCheckbox(file.getCheckboxLocator());
-      }
+        actions.moveToElement(file.getCheckboxLocator()).click().perform();
+        }
     }
   }
 
   public void selectAllFiles() {
-    setCheckbox(SELECT_ALL_CHECKBOX);
+    actions.moveToElement(find(SELECT_ALL_CHECKBOX)).click().perform();
   }
 
   public void createNewFolder() {
     click(NEW_FOLDER_BUTTON);
-  }
-
-  private void execution(String processing, String finish) {
-    if (isDisplayed(processing)) {
-      setExplicitWaitBySeconds(15);
-      isDisplayed(finish);
-      setExplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
-    }
   }
 }

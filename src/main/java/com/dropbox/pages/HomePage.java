@@ -16,9 +16,7 @@ public class HomePage extends BasePage {
 
   @Override
   public boolean isLoaded() {
-    setExplicitWaitBySeconds(10);
-    boolean status = isDisplayed(HOME_HEADER) & wd.getTitle().equals(HOME_TITLE_TEXT);
-    setExplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
-    return status;
+    setExplicitWaitBySeconds(15);
+    return isDisplayed(HOME_HEADER) & wd.getTitle().equals(HOME_TITLE_TEXT);
   }
 }

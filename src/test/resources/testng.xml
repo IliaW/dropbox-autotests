@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite0" verbose="1">
+    <parameter name="browser" value="chrome"/>
+    <test name="ChromeTests">
+        <classes>
+            <class name="com.dropbox.tests.SignInTests"/>
+<!--            <class name="com.dropbox.tests.UploadFileTests"/>-->
+            <class name="com.dropbox.tests.SearchTests"/>
+            <class name="com.dropbox.tests.DeleteFileTests"/>
+            <!--<class name="com.dropbox.tests.SignOutTests"/>-->
+        </classes>
+    </test>
+</suite>

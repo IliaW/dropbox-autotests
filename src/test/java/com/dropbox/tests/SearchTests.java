@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
-import static com.dropbox.model.UserType.BASIC_USER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchTests extends Launcher {
@@ -22,7 +21,7 @@ public class SearchTests extends Launcher {
 
   @BeforeMethod
   public void setUpBeforeTest() {
-      open.homePage();
+   // open.homePage();
   }
 
   @Test
@@ -32,7 +31,7 @@ public class SearchTests extends Launcher {
   }
 
   @Test
-  public void checkTheResultsForComplianceWithTheRequest() {
+  public void checkResultsForComplianceWithRequest() {
     String searchRequest = "jpg";
     search.byText(searchRequest);
     assertThat(search.resultsContain(searchRequest)).isTrue();

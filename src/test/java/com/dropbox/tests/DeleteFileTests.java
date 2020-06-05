@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
 import static com.dropbox.data.FilesData.*;
-import static com.dropbox.model.UserType.BASIC_USER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeleteFileTests extends Launcher {
@@ -43,15 +42,15 @@ public class DeleteFileTests extends Launcher {
   public void deleteAFewFiles() {
     filesPage.selectAllFilesWhichContainText("Aivazovsky");
     open.contextMenu().delete();
-    deleteMW.confirm();
-    assertThat(countOfFilesBeforeDelete).isLessThan(filesPage.getCountOfFilesInList());
+    deleteModalWindow.confirm();
+    assertThat(filesPage.getCountOfFilesInList()).isLessThan(countOfFilesBeforeDelete);
   }
 
   @Test(priority = 2)
   public void deleteAllFiles() {
     filesPage.selectAllFiles();
     open.contextMenu().delete();
-    deleteMW.confirm();
+    deleteModalWindow.confirm();
     assertThat(filesPage.getCountOfFilesInList()).isEqualTo(0);
   }
 }

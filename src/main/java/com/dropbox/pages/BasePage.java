@@ -14,22 +14,22 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.By.xpath;
-import static org.openqa.selenium.support.ui.ExpectedConditions.stalenessOf;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public abstract class BasePage {
 
   protected WebDriver wd;
   protected WebDriverWait wait;
-  private final Actions make;
+  protected final Actions actions;
   protected final int DEFAULT_IMPLICIT_WAIT = 4;
+  protected final int DEFAULT_EXPLICIT_WAIT = 4;
 
   private final String FILE_ROW = "//tbody[contains(@class,'table-body mc-table-body-culled')]//tr";
 
   public BasePage(WebDriver wd, WebDriverWait wait) {
     this.wd = wd;
     this.wait = wait;
-    make = new Actions(wd);
+    actions = new Actions(wd);
   }
 
   // Abstract
@@ -49,7 +49,7 @@ public abstract class BasePage {
   }
 
   public void doubleClick(String locator) {
-    make.doubleClick(find(locator)).perform();
+    actions.doubleClick(find(locator)).perform();
   }
 
   public void enter(String text, WebElement field) {
@@ -65,12 +65,6 @@ public abstract class BasePage {
   public void setCheckbox(String locator) {
     if (!find(locator).isSelected()) {
       click(locator);
-    }
-  }
-
-  public void setCheckbox(WebElement locator) {
-    if (!locator.isSelected()) {
-      locator.click();
     }
   }
 
@@ -96,10 +90,15 @@ public abstract class BasePage {
   }
 
   public int getCountOfFilesInList() {
-    setImplicitWaitBySeconds(1);
-    int count = findAll(FILE_ROW).size();
-    setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
-    return count;
+    return findAll(FILE_ROW).size();
+  }
+
+  public void actionExecution(String processing, String finish) {
+    if (isDisplayed(processing)) {
+      setExplicitWaitBySeconds(15);
+      isDisplayed(finish);
+      setExplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+    }
   }
 
   // Wait
@@ -117,16 +116,6 @@ public abstract class BasePage {
       wait.until(visibilityOfElementLocated(xpath(locator)));
       return true;
     } catch (ElementNotVisibleException | TimeoutException e) {
-      e.printStackTrace();
-      return false;
-    }
-  }
-
-  public boolean isStaleness(String locator) {
-    try {
-      wait.until(stalenessOf(find(locator)));
-      return true;
-    } catch (Exception e) {
       e.printStackTrace();
       return false;
     }

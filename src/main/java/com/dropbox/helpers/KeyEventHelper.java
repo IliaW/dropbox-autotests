@@ -18,7 +18,7 @@ public class KeyEventHelper {
   public KeyEventHelper() {
     try {
       robot = new Robot();
-      robot.setAutoDelay(100);
+      robot.setAutoDelay(200);
     } catch (AWTException e) {
       e.printStackTrace();
     }
@@ -42,11 +42,17 @@ public class KeyEventHelper {
     robot.keyRelease(KeyEvent.VK_ENTER);
   }
 
+  public void clickEscape() {
+    robot.keyPress(KeyEvent.VK_ESCAPE);
+    robot.keyRelease(KeyEvent.VK_ESCAPE);
+  }
+
+
   public void uploadFileFromWindowsOS(File file) {
     copyPathToClipboard(file);
     insertTextFromClipboard();
     clickEnter();
-
+    clickEscape();
   }
 
   public void uploadFolderFromWindowsOS(File file) {
@@ -56,8 +62,8 @@ public class KeyEventHelper {
     clickEnter();
     // switchTo().alert don't work
     robot.keyPress(KeyEvent.VK_LEFT);
-    robot.keyPress(KeyEvent.VK_LEFT);
+    robot.keyRelease(KeyEvent.VK_LEFT);
     clickEnter();
+    clickEscape();
   }
-
 }

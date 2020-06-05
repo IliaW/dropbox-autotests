@@ -7,7 +7,10 @@ import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static com.dropbox.data.CookiesData.*;
+import java.io.IOException;
+
+import static com.dropbox.App.homePage;
+import static com.dropbox.data.CookiesData.COOKIES_BASIC_USER;
 
 public class SignInPage extends BasePage {
 
@@ -32,18 +35,48 @@ public class SignInPage extends BasePage {
   }
 
   public void signInWithCookies() {
-    for (Cookie c : cookies) {
+    for (Cookie c : COOKIES_BASIC_USER) {
       wd.manage().addCookie(c);
     }
     refreshPage();
   }
 
-//  Not working yet.
-//  public void signInAs(User user) {
-//    enter(user.getLogin(), into(EMAIL_FIELD));
-//    enter(user.getPass(), into(PASSWORD_FIELD));
-//    click(SIGN_IN_BUTTON);
-//  }
+  /**
+   * At first, the program tries to log in using stored cookies.
+   * If this fails - authorization using user data.
+   * After authorization with user data, the cookie file is updated.
+   * Made to avoid  "I am not a robot" form.
+   */
+
+  public void signInAs(User user) {
+    if (user.cookiesIsExist()) {
+      System.out.println("Log in with COOKIES");
+      try {
+        for (Cookie c : user.getCookies()) {
+          wd.manage().addCookie(c);
+        }
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      refreshPage();
+      if (!homePage.isLoaded()) {
+        System.out.println("Log in with COOKIES FAILED.");
+        user.deleteCookiesFile();
+        signInAs(user);
+      }
+    } else {
+      System.out.println("Log in with EMAIL");
+      enter(user.getLogin(), into(EMAIL_FIELD));
+      enter(user.getPass(), into(PASSWORD_FIELD));
+      click(SIGN_IN_BUTTON);
+      homePage.isLoaded();
+      try {
+        user.saveCookies(wd.manage().getCookies());
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
 
   public SignInPage setRememberMeCheckbox() {
     setCheckbox(REMEMBER_ME_CHECKBOX);

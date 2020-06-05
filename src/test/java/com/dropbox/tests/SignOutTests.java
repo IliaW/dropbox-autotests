@@ -5,7 +5,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
-import static com.dropbox.model.UserType.BASIC_USER;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignOutTests extends Launcher {
@@ -19,7 +18,7 @@ public class SignOutTests extends Launcher {
     }
   }
 
-  @Test
+  @Test(enabled = false)
   public void signOut() {
     open.accountMenu().signOut();
     assertThat(signInPage.isLoaded()).isTrue();

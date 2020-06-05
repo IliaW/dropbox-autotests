@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import static org.openqa.selenium.By.xpath;
 
 public class DropboxFile {
+
+  private WebElement element;
   private String name;
   private String modified;
   private String members;
@@ -14,25 +16,30 @@ public class DropboxFile {
   private final String NAME_LOCATOR = ".//span[contains(@class,'file-name-element')]";
   private final String MODIFIED_LOCATOR = ".//td[contains(@class,'file-modified-at-cell')]//div[contains(@class,'mc-media-cell-text')]";
   private final String MEMBERS_LOCATOR = ".//td[contains(@class,'file-shared-with-cell')]//div[contains(@class,'audience-description')]";
-  private final String CHECKBOX = ".//span[@class = 'mc-checkbox-border']";
+  private final String CHECKBOX = ".//input[@class = 'mc-checkbox-input']";
 
-  public DropboxFile(WebElement file) {
-    this.name = file.findElement(xpath(NAME_LOCATOR)).getText();
+  public DropboxFile(WebElement element) {
+    this.element = element;
+    this.name = element.findElement(xpath(NAME_LOCATOR)).getText();
     try {
-      this.modified = file.findElement(xpath(MODIFIED_LOCATOR)).getText();
+      this.modified = element.findElement(xpath(MODIFIED_LOCATOR)).getText();
     } catch (NoSuchElementException e) {
       this.modified = null;
     }
     try {
-      this.members = file.findElement(xpath(MEMBERS_LOCATOR)).getText();
+      this.members = element.findElement(xpath(MEMBERS_LOCATOR)).getText();
     } catch (NoSuchElementException e) {
       this.members = null;
     }
     try {
-      this.checkbox = file.findElement(xpath(CHECKBOX));
+      this.checkbox = element.findElement(xpath(CHECKBOX));
     } catch (NoSuchElementException e) {
       this.checkbox = null;
     }
+  }
+
+  public WebElement getElement() {
+    return element;
   }
 
   public WebElement getCheckboxLocator() {
