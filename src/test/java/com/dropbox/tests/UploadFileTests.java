@@ -1,34 +1,25 @@
 package com.dropbox.tests;
 
 import com.dropbox.Launcher;
-import org.testng.annotations.AfterMethod;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
 import static com.dropbox.data.FilesData.*;
+import static com.dropbox.model.UserType.BASIC_USER_VOVK_ILLIA;
 import static org.assertj.core.api.Assertions.assertThat;
-
-/**
- * Uploading:
- * JPEG picture (pass)
- * PDF file (pass)
- * MP4 video (pass)
- * empty folder (fail)
- * folder with files (pass)
- */
 
 public class UploadFileTests extends Launcher {
 
-  int countOfFilesBeforeUpload;
+  int numberOfFilesBeforeUpload;
 
   @BeforeClass
   public void setUpBeforeClass() {
     if (!accountMenu.isUserAuthorized()) {
       open.signInPage();
-      signInPage.signInWithCookies();
-      assertThat(homePage.isLoaded()).isTrue();
+      signInPage.signInAs(BASIC_USER_VOVK_ILLIA);
     }
   }
 
@@ -37,41 +28,61 @@ public class UploadFileTests extends Launcher {
     if (!filesPage.isLoaded()) {
       open.filesPage();
     }
-    countOfFilesBeforeUpload = filesPage.getCountOfFilesInList();
-  }
-
-  @AfterMethod
-  public void tearDownAfterTest() {
-    countOfFilesBeforeUpload = 0;
+    numberOfFilesBeforeUpload = filesPage.getNumberOfFilesInList();
   }
 
   @Test
-  public void uploadPictureJPEG() {
-    filesPage.uploadFiles(AIVAZOVSKY_THE_NINTH_WAVE_JPG);
-    assertThat(countOfFilesBeforeUpload).isEqualTo(filesPage.getCountOfFilesInList() - 1);
+  @Epic("Smoke tests")
+  @Feature("Upload files")
+  @Story("Upload JPG picture")
+  @Severity(SeverityLevel.CRITICAL)
+  public void uploadPictureJPG() {
+    secondaryActionMenu.clickUploadFilesButton();
+    filesPage.uploadFile(AIVAZOVSKY_THE_NINTH_WAVE_JPG);
+    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
+  @Epic("Smoke tests")
+  @Feature("Upload files")
+  @Story("Upload PDF file")
+  @Severity(SeverityLevel.CRITICAL)
   public void uploadFilePDF() {
-    filesPage.uploadFiles(HOW_GOOGLE_TESTS_PDF);
-    assertThat(countOfFilesBeforeUpload).isEqualTo(filesPage.getCountOfFilesInList() - 1);
+    secondaryActionMenu.clickUploadFilesButton();
+    filesPage.uploadFile(HOW_GOOGLE_TESTS_PDF);
+    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
+  @Epic("Smoke tests")
+  @Feature("Upload files")
+  @Story("Upload MP4 file")
+  @Severity(SeverityLevel.CRITICAL)
   public void uploadVideoMP4() {
-    filesPage.uploadFiles(SURPRISED_KITTY_MP4);
-    assertThat(countOfFilesBeforeUpload).isEqualTo(filesPage.getCountOfFilesInList() - 1);
+    secondaryActionMenu.clickUploadFilesButton();
+    filesPage.uploadFile(SURPRISED_KITTY_MP4);
+    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
+  @Epic("Smoke tests")
+  @Feature("Upload files")
+  @Story("Upload empty folder")
+  @Severity(SeverityLevel.CRITICAL)
   public void uploadEmptyFolder() {
+    secondaryActionMenu.clickUploadFolderButton();
     filesPage.uploadFolder(EMPTY_FOLDER);
-    assertThat(countOfFilesBeforeUpload).isEqualTo(filesPage.getCountOfFilesInList() - 1);
+    assertThat(filesPage.getNumberOfFilesInList()).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
+  @Epic("Smoke tests")
+  @Feature("Upload files")
+  @Story("Upload folder with JPG files")
+  @Severity(SeverityLevel.CRITICAL)
   public void uploadFolder() {
+    secondaryActionMenu.clickUploadFolderButton();
     filesPage.uploadFolder(FOLDER_WITH_3_JPG_PICTURES);
-    assertThat(countOfFilesBeforeUpload).isEqualTo(filesPage.getCountOfFilesInList() - 1);
+    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 }

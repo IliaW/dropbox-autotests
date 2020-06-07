@@ -43,7 +43,7 @@ public class DropboxFile {
   }
 
   public WebElement getCheckboxLocator() {
-   return checkbox;
+    return checkbox;
   }
 
   public String getName() {

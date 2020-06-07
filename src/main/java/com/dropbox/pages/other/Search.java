@@ -1,6 +1,6 @@
 package com.dropbox.pages.other;
 
-import com.dropbox.helpers.KeyEventHelper;
+import com.dropbox.helpers.KeyboardHelper;
 import com.dropbox.model.DropboxFile;
 import com.dropbox.pages.BasePage;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +12,7 @@ import static java.lang.Integer.parseInt;
 
 public class Search extends BasePage {
 
-  KeyEventHelper keyEventHelper;
+  private KeyboardHelper keyboardHelper;
 
   private final String SEARCH_VIEW = "//div[@id='search-view']";
   private final String SEARCH_FIELD = "//input[contains(@aria-label,'Search in folder')]";
@@ -22,7 +22,7 @@ public class Search extends BasePage {
 
   public Search(WebDriver wd, WebDriverWait wait) {
     super(wd, wait);
-    keyEventHelper = new KeyEventHelper();
+    keyboardHelper = new KeyboardHelper();
   }
 
   @Override
@@ -30,13 +30,12 @@ public class Search extends BasePage {
     return isDisplayed(X_BUTTON) & isDisplayed(SEARCH_VIEW);
   }
 
-  // search by text
   public void byText(String text) {
     click(SEARCH_FIELD);
     this.isLoaded();
     enter(text, into(SEARCH_FIELD));
     waitFor(1000);
-    keyEventHelper.clickEnter();
+    keyboardHelper.clickEnter();
     waitFor(3000);
   }
 
@@ -55,10 +54,10 @@ public class Search extends BasePage {
     List<DropboxFile> dropboxFiles = getListOfAllFilesOnPage();
     setImplicitWaitBySeconds(4);
     for (DropboxFile resultOfSearch : dropboxFiles) {
-      if(!resultOfSearch.getName().toLowerCase().contains(request.toLowerCase())){
-        return false;
+      if (resultOfSearch.getName().toLowerCase().contains(request.toLowerCase())) {
+        return true;
       }
     }
-    return true;
+    return false;
   }
 }

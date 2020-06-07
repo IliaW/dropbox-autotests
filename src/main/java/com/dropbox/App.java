@@ -3,14 +3,14 @@ package com.dropbox;
 import com.dropbox.helpers.NavigationHelper;
 import com.dropbox.pages.*;
 import com.dropbox.pages.menus.AccountMenu;
-import com.dropbox.pages.menus.ContextMenu;
-import com.dropbox.pages.menus.CreateNewFileMenu;
+import com.dropbox.pages.menus.CreateNewFile;
+import com.dropbox.pages.menus.PrimaryActionMenu;
+import com.dropbox.pages.menus.SecondaryActionMenu;
 import com.dropbox.pages.modal.windows.DeleteModalWindow;
 import com.dropbox.pages.other.Search;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
@@ -27,19 +27,19 @@ public class App {
   public static SignInPage signInPage;
   public static HomePage homePage;
   public static FilesPage filesPage;
-  public static SharedPage sharedPage;
   public static DeletedFilesPage deletedFilesPage;
   public static SettingsPage settingsPage;
 
   // Menus
   public static AccountMenu accountMenu;
-  public static ContextMenu contextMenu;
-  public static CreateNewFileMenu createNewFileMenu;
+  public static CreateNewFile createNewFile;
+  public static PrimaryActionMenu primaryActionMenu;
+  public static SecondaryActionMenu secondaryActionMenu;
 
   // Modal Windows
   public static DeleteModalWindow deleteModalWindow;
 
-  // Other features
+  // Other
   public static Search search;
 
   // Helpers
@@ -61,15 +61,15 @@ public class App {
     signInPage = new SignInPage(driver, wait);
     homePage = new HomePage(driver, wait);
     filesPage = new FilesPage(driver, wait);
-    sharedPage = new SharedPage(driver, wait);
     deletedFilesPage = new DeletedFilesPage(driver, wait);
     settingsPage = new SettingsPage(driver, wait);
 
     accountMenu = new AccountMenu(driver, wait);
-    contextMenu = new ContextMenu(driver, wait);
-    createNewFileMenu = new CreateNewFileMenu(driver, wait);
+    createNewFile = new CreateNewFile(driver, wait);
+    primaryActionMenu = new PrimaryActionMenu(driver, wait);
+    secondaryActionMenu = new SecondaryActionMenu(driver, wait);
 
-    deleteModalWindow = new DeleteModalWindow(driver,wait);
+    deleteModalWindow = new DeleteModalWindow(driver, wait);
 
     search = new Search(driver, wait);
     open = new NavigationHelper();

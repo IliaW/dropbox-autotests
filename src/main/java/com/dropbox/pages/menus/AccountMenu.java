@@ -4,7 +4,7 @@ import com.dropbox.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AccountMenu extends BasePage implements Menu {
+public class AccountMenu extends BasePage {
 
   private final String ACCOUNT_MENU_BUTTON = "//button[@aria-label= 'Account menu']";
   private final String ADD_PHOTO_BUTTON = "//button[@class='account-menu-avatar-link ']";
@@ -22,13 +22,12 @@ public class AccountMenu extends BasePage implements Menu {
     return isDisplayed(SETTINGS_BUTTON) & isDisplayed(SIGN_OUT_BUTTON);
   }
 
-  @Override
   public AccountMenu openMenu() {
     click(ACCOUNT_MENU_BUTTON);
     return this;
   }
 
-  public boolean isUserAuthorized(){
+  public boolean isUserAuthorized() {
     return isDisplayed(ACCOUNT_MENU_BUTTON);
   }
 

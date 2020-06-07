@@ -18,15 +18,17 @@ public class User {
   private File cookieFile;
 
   public User(String login, String pass) {
+    this.name = "NoName_"+ (int)(Math.random() * 9999);
     this.login = login;
     this.pass = pass;
+    this.cookieFile = new File("src/main/resources/" + name + ".txt");
   }
 
   public User(String name, String login, String pass) {
     this.name = name;
     this.login = login;
     this.pass = pass;
-    this.cookieFile = new File("src/main/resources/", name + ".txt");
+    this.cookieFile = new File("src/main/resources/" + name + ".txt");
   }
 
   public String getLogin() {
@@ -84,7 +86,11 @@ public class User {
   }
 
   public void deleteCookiesFile() {
-    cookieFile.delete();
+    if (cookieFile.delete()) {
+      System.out.println("File " + cookieFile.getName() + " deleted.");
+    } else {
+      System.out.println("Oops. File" + cookieFile.getPath() + " was not deleted.");
+    }
   }
 
   @Override

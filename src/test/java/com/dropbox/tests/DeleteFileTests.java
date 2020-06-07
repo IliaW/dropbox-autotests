@@ -1,28 +1,26 @@
 package com.dropbox.tests;
 
 import com.dropbox.Launcher;
-import org.testng.annotations.AfterMethod;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
-import static com.dropbox.data.FilesData.*;
+import static com.dropbox.model.UserType.BASIC_USER_VOVK_ILLIA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeleteFileTests extends Launcher {
 
-  int countOfFilesBeforeDelete;
+  private int numberOfFilesBeforeDelete;
 
   @BeforeClass
   public void setUpBeforeClass() {
     if (!accountMenu.isUserAuthorized()) {
       open.signInPage();
-      signInPage.signInWithCookies();
-      assertThat(homePage.isLoaded()).isTrue();
+      signInPage.signInAs(BASIC_USER_VOVK_ILLIA);
     }
-    open.filesPage();
-    filesPage.uploadFiles(AIVAZOVSKY_THE_NINTH_WAVE_JPG, AIVAZOVSKY_CHAOS_JPG, SURPRISED_KITTY_MP4);
   }
 
   @BeforeMethod
@@ -30,27 +28,24 @@ public class DeleteFileTests extends Launcher {
     if (!filesPage.isLoaded()) {
       open.filesPage();
     }
-    countOfFilesBeforeDelete = filesPage.getCountOfFilesInList();
+    numberOfFilesBeforeDelete = filesPage.getNumberOfFilesInList();
   }
 
-  @AfterMethod
-  public void tearDownAfterTest() {
-    countOfFilesBeforeDelete = 0;
-  }
-
+  @Severity(SeverityLevel.CRITICAL)
   @Test(priority = 1)
   public void deleteAFewFiles() {
     filesPage.selectAllFilesWhichContainText("Aivazovsky");
     open.contextMenu().delete();
     deleteModalWindow.confirm();
-    assertThat(filesPage.getCountOfFilesInList()).isLessThan(countOfFilesBeforeDelete);
+    assertThat(filesPage.getNumberOfFilesInList()).isLessThan(numberOfFilesBeforeDelete);
   }
 
+  @Severity(SeverityLevel.NORMAL)
   @Test(priority = 2)
   public void deleteAllFiles() {
     filesPage.selectAllFiles();
     open.contextMenu().delete();
     deleteModalWindow.confirm();
-    assertThat(filesPage.getCountOfFilesInList()).isEqualTo(0);
+    assertThat(filesPage.getNumberOfFilesInList()).isEqualTo(0);
   }
 }

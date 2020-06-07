@@ -5,10 +5,10 @@
     <test name="ChromeTests">
         <classes>
             <class name="com.dropbox.tests.SignInTests"/>
-<!--            <class name="com.dropbox.tests.UploadFileTests"/>-->
+            <class name="com.dropbox.tests.UploadFileTests"/>
             <class name="com.dropbox.tests.SearchTests"/>
             <class name="com.dropbox.tests.DeleteFileTests"/>
-            <!--<class name="com.dropbox.tests.SignOutTests"/>-->
+            <class name="com.dropbox.tests.SignOutTests"/>
         </classes>
     </test>
 </suite>

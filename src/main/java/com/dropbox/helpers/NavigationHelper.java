@@ -1,8 +1,8 @@
 package com.dropbox.helpers;
 
 import com.dropbox.pages.menus.AccountMenu;
-import com.dropbox.pages.menus.ContextMenu;
-import com.dropbox.pages.menus.CreateNewFileMenu;
+import com.dropbox.pages.menus.CreateNewFile;
+import com.dropbox.pages.menus.PrimaryActionMenu;
 
 import static com.dropbox.App.*;
 
@@ -28,11 +28,6 @@ public class NavigationHelper {
     filesPage.isLoaded();
   }
 
-  public void sharedPage() {
-    openURL(sharedPage.URL);
-    sharedPage.isLoaded();
-  }
-
   public void deletedFilesPage() {
     openURL(deletedFilesPage.URL);
     deletedFilesPage.isLoaded();
@@ -44,18 +39,18 @@ public class NavigationHelper {
   }
 
   // Menus
-  public AccountMenu accountMenu(){
+  public AccountMenu accountMenu() {
     accountMenu.openMenu().isLoaded();
     return accountMenu;
   }
 
-  public ContextMenu contextMenu(){
-    contextMenu.openMenu().isLoaded();
-    return contextMenu;
+  public PrimaryActionMenu contextMenu() {
+    primaryActionMenu.openMenu().isLoaded();
+    return primaryActionMenu;
   }
 
-  public CreateNewFileMenu createNewFileMenu(){
-    createNewFileMenu.openMenu().isLoaded();
-    return createNewFileMenu;
+  public CreateNewFile createNewFileMenu() {
+    createNewFile.openMenu().isLoaded();
+    return createNewFile;
   }
 }

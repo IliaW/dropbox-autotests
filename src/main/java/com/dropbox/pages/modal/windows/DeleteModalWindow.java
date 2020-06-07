@@ -27,7 +27,7 @@ public class DeleteModalWindow extends BasePage implements ModalWindow {
   public void confirm() {
     this.isLoaded();
     click(DELETE_BUTTON);
-    filesPage.actionExecution(DELETING_SNACKBAR,DELETED_SNACKBAR);
+    filesPage.actionExecution(DELETING_SNACKBAR, DELETED_SNACKBAR);
     refreshPage();
   }
 

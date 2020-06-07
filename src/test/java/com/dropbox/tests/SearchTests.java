@@ -1,36 +1,38 @@
 package com.dropbox.tests;
 
 import com.dropbox.Launcher;
-import org.testng.annotations.BeforeClass;
+import io.qameta.allure.Flaky;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.dropbox.App.*;
+import static com.dropbox.model.UserType.BASIC_USER_VOVK_ILLIA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchTests extends Launcher {
 
-  @BeforeClass
-  public void setUpBeforeClass() {
-    if (!accountMenu.isUserAuthorized()) {
-      open.signInPage();
-      signInPage.signInWithCookies();
-      assertThat(homePage.isLoaded()).isTrue();
-    }
-  }
-
   @BeforeMethod
   public void setUpBeforeTest() {
-   // open.homePage();
+    if (!accountMenu.isUserAuthorized()) {
+      open.signInPage();
+      signInPage.signInAs(BASIC_USER_VOVK_ILLIA);
+    }
+    open.homePage();
   }
 
+  // When searching, sometimes system logout.
   @Test
+  @Severity(SeverityLevel.MINOR)
+  @Flaky
   public void resultCounter() {
     search.byText("jpg");
-    assertThat(search.counterOfSearchResults()).isEqualTo(search.getCountOfFilesInList());
+    assertThat(search.counterOfSearchResults()).isEqualTo(search.getNumberOfFilesInList());
   }
 
   @Test
+  @Severity(SeverityLevel.NORMAL)
   public void checkResultsForComplianceWithRequest() {
     String searchRequest = "jpg";
     search.byText(searchRequest);
@@ -38,6 +40,7 @@ public class SearchTests extends Launcher {
   }
 
   @Test
+  @Severity(SeverityLevel.NORMAL)
   public void noResultsFound() {
     search.byText("&&&");
     assertThat(search.counterOfSearchResults()).isEqualTo(0);

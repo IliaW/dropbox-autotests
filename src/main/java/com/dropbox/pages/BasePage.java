@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.By.xpath;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public abstract class BasePage {
 
@@ -89,7 +89,7 @@ public abstract class BasePage {
     return filesList;
   }
 
-  public int getCountOfFilesInList() {
+  public int getNumberOfFilesInList() {
     return findAll(FILE_ROW).size();
   }
 
@@ -97,7 +97,7 @@ public abstract class BasePage {
     if (isDisplayed(processing)) {
       setExplicitWaitBySeconds(15);
       isDisplayed(finish);
-      setExplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+      setExplicitWaitBySeconds(DEFAULT_EXPLICIT_WAIT);
     }
   }
 
