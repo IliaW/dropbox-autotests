@@ -8,22 +8,22 @@ import org.testng.annotations.Test;
 
 public class SettingsTest extends Launcher {
 
-  @DataProvider
-  public static Object[][] accountNames() {
-    return new Object[][]{
-            {}
-    };
-  }
+   @DataProvider
+   public static Object[][] accountNames() {
+      return new Object[][]{
+              {}
+      };
+   }
 
-  @Severity(SeverityLevel.NORMAL)
-  @Test
-  public void addAccountPhoto() {
+   @Severity(SeverityLevel.NORMAL)
+   @Test
+   public void addAccountPhoto() {
 
-  }
+   }
 
-  @Severity(SeverityLevel.NORMAL)
-  @Test(dataProvider = "accountNames")
-  public void changeAccountName(String firstName, String lastName) {
+   @Severity(SeverityLevel.NORMAL)
+   @Test(dataProvider = "accountNames")
+   public void changeAccountName(String firstName, String lastName) {
 
-  }
+   }
 }

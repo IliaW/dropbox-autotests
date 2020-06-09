@@ -13,30 +13,30 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UploadToModalWindow extends BasePage implements ModalWindow {
 
-  private final String UPLOAD_TO_HEADER = "//div[contains(@class,'modal-header') and text() = 'Upload to…']";
-  private final String UPLOAD_BUTTON = "//button/span[text() = 'Upload']";
-  private final String CANCEL_BUTTON = "//button/span[text() = 'Cancel']";
+   private final String UPLOAD_TO_HEADER = "//div[contains(@class,'modal-header') and text() = 'Upload to…']";
+   private final String UPLOAD_BUTTON = "//button/span[text() = 'Upload']";
+   private final String CANCEL_BUTTON = "//button/span[text() = 'Cancel']";
 
-  public UploadToModalWindow(WebDriver wd, WebDriverWait wait) {
-    super(wd, wait);
-  }
+   public UploadToModalWindow(WebDriver wd, WebDriverWait wait) {
+      super(wd, wait);
+   }
 
-  @Override
-  public boolean isLoaded() {
-    return isDisplayed(UPLOAD_TO_HEADER);
-  }
+   @Override
+   public boolean isLoaded() {
+      return isDisplayed(UPLOAD_TO_HEADER);
+   }
 
-  @Override
-  public void confirm() {
-    click(UPLOAD_BUTTON);
-  }
+   @Override
+   public void confirm() {
+      click(UPLOAD_BUTTON);
+   }
 
-  @Override
-  public void cancel() {
-    click(CANCEL_BUTTON);
-  }
+   @Override
+   public void cancel() {
+      click(CANCEL_BUTTON);
+   }
 
-  public void useFolder(String folderName) {
-    click(String.format("//tr[contains(@class,'folder_picker_row')]//div[text() = '%s']", folderName));
-  }
+   public void useFolder(String folderName) {
+      click(String.format("//tr[contains(@class,'folder_picker_row')]//div[text() = '%s']", folderName));
+   }
 }

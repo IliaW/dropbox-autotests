@@ -2,7 +2,7 @@ package com.dropbox.pages.modal.windows;
 
 public interface ModalWindow {
 
-  void confirm();
+   void confirm();
 
-  void cancel();
+   void cancel();
 }

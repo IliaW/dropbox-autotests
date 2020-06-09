@@ -1,6 +1,7 @@
 package com.dropbox.tests;
 
 import com.dropbox.Launcher;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.BeforeMethod;
@@ -12,18 +13,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignOutTests extends Launcher {
 
-  @BeforeMethod
-  public void setUpBeforeTest() {
-    if (!accountMenu.isUserAuthorized()) {
-      open.signInPage();
-      signInPage.signInAs(BASIC_USER_VOVK_ILLIA);
-    }
-  }
+   @BeforeMethod
+   public void setUpBeforeTest() {
+      if (!accountMenu.isUserAuthorized()) {
+         open.signInPage().signInAs(BASIC_USER_VOVK_ILLIA);
+         signInPage.isLoaded();
+      }
+   }
 
-  @Severity(SeverityLevel.CRITICAL)
-  @Test()
-  public void signOut() {
-    open.accountMenu().signOut();
-    assertThat(signInPage.isLoaded()).isTrue();
-  }
+   @Test()
+   @Feature("Sign out")
+   @Severity(SeverityLevel.CRITICAL)
+   public void signOut() {
+      open.accountMenu().signOut();
+      assertThat(signInPage.isLoaded()).isTrue();
+   }
 }

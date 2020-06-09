@@ -12,90 +12,92 @@ import java.util.Set;
 
 public class User {
 
-  private String name;
-  private String login;
-  private String pass;
-  private File cookieFile;
+   private String name;
+   private String login;
+   private String pass;
+   private File cookieFile;
 
-  public User(String login, String pass) {
-    this.name = "NoName_" + (int) (Math.random() * 9999);
-    this.login = login;
-    this.pass = pass;
-    this.cookieFile = new File("src/main/resources/" + name + ".txt");
-  }
+   private final String pathToFile = "src/main/resources/";
 
-  public User(String name, String login, String pass) {
-    this.name = name;
-    this.login = login;
-    this.pass = pass;
-    this.cookieFile = new File("src/main/resources/" + name + ".txt");
-  }
+   public User(String login, String pass) {
+      this.name = "NoName_" + (int) (Math.random() * 9999);
+      this.login = login;
+      this.pass = pass;
+      this.cookieFile = new File(pathToFile + name + ".txt");
+   }
 
-  public String getLogin() {
-    return login;
-  }
+   public User(String name, String login, String pass) {
+      this.name = name;
+      this.login = login;
+      this.pass = pass;
+      this.cookieFile = new File(pathToFile + name + ".txt");
+   }
 
-  public String getPass() {
-    return pass;
-  }
+   public String getLogin() {
+      return login;
+   }
 
-  public void setLogin(String login) {
-    this.login = login;
-  }
+   public String getPass() {
+      return pass;
+   }
 
-  public void setPass(String pass) {
-    this.pass = pass;
-  }
+   public void setLogin(String login) {
+      this.login = login;
+   }
 
-  public String getName() {
-    return name;
-  }
+   public void setPass(String pass) {
+      this.pass = pass;
+   }
 
-  public void setName(String name) {
-    this.name = name;
-  }
+   public String getName() {
+      return name;
+   }
 
-  public boolean cookiesIsExist() {
-    return cookieFile.exists();
-  }
+   public void setName(String name) {
+      this.name = name;
+   }
 
-  public Set<Cookie> getSavedCookies() throws IOException {
-    Set<Cookie> cookiesList = new HashSet<>();
-    FileReader fr = new FileReader(cookieFile.getAbsolutePath());
-    Scanner scan = new Scanner(fr);
-    while (scan.hasNextLine()) {
-      String line = scan.nextLine();
-      String[] list = line.split(": ");
-      if (list.length == 2) {
-        cookiesList.add(new Cookie(list[0], list[1]));
+   public boolean cookiesIsExist() {
+      return cookieFile.exists();
+   }
+
+   public Set<Cookie> getSavedCookies() throws IOException {
+      Set<Cookie> cookiesList = new HashSet<>();
+      FileReader fr = new FileReader(cookieFile.getAbsolutePath());
+      Scanner scan = new Scanner(fr);
+      while (scan.hasNextLine()) {
+         String line = scan.nextLine();
+         String[] list = line.split(": ");
+         if (list.length == 2) {
+            cookiesList.add(new Cookie(list[0], list[1]));
+         }
       }
-    }
-    fr.close();
-    return cookiesList;
-  }
+      fr.close();
+      return cookiesList;
+   }
 
-  public void saveCookies(Set<Cookie> cookies) throws IOException {
-    FileWriter fw = new FileWriter("src/main/resources/" + name + ".txt");
-    for (Cookie c : cookies) {
-      fw.write(c.getName() + ": " + c.getValue() + "\n");
-    }
-    fw.close();
-  }
+   public void saveCookies(Set<Cookie> cookies) throws IOException {
+      FileWriter fw = new FileWriter(pathToFile + name + "'s_cookie.txt");
+      for (Cookie c : cookies) {
+         fw.write(c.getName() + ": " + c.getValue() + "\n");
+      }
+      fw.close();
+   }
 
-  public void deleteCookiesFile() {
-    if (cookieFile.delete()) {
-      System.out.println("File " + cookieFile.getName() + " deleted.");
-    } else {
-      System.out.println("Oops. File" + cookieFile.getPath() + " was not deleted.");
-    }
-  }
+   public void deleteCookiesFile() {
+      if (cookieFile.delete()) {
+         System.out.println("File " + cookieFile.getName() + " deleted.");
+      } else {
+         System.out.println("Oops. File" + cookieFile.getName() + " was not deleted.");
+      }
+   }
 
-  @Override
-  public String toString() {
-    return "User{" +
-            "name='" + name + '\'' +
-            ", login='" + login + '\'' +
-            ", pass='" + pass + '\'' +
-            '}';
-  }
+   @Override
+   public String toString() {
+      return "User{" +
+              "name='" + name + '\'' +
+              ", login='" + login + '\'' +
+              ", pass='" + pass + '\'' +
+              '}';
+   }
 }
