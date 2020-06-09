@@ -13,8 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeleteFileTests extends Launcher {
 
-  private int numberOfFilesBeforeDelete;
-
   @BeforeClass
   public void setUpBeforeClass() {
     if (!accountMenu.isUserAuthorized()) {
@@ -28,24 +26,23 @@ public class DeleteFileTests extends Launcher {
     if (!filesPage.isLoaded()) {
       open.filesPage();
     }
-    numberOfFilesBeforeDelete = filesPage.getNumberOfFilesInList();
   }
 
-  @Severity(SeverityLevel.CRITICAL)
   @Test(priority = 1)
+  @Severity(SeverityLevel.CRITICAL)
   public void deleteAFewFiles() {
     filesPage.selectAllFilesWhichContainText("Aivazovsky");
     open.contextMenu().delete();
     deleteModalWindow.confirm();
-    assertThat(filesPage.getNumberOfFilesInList()).isLessThan(numberOfFilesBeforeDelete);
+    assertThat(filesPage.selectAllFilesWhichContainText("Aivazovsky")).isEqualTo(0);
   }
 
-  @Severity(SeverityLevel.NORMAL)
   @Test(priority = 2)
+  @Severity(SeverityLevel.NORMAL)
   public void deleteAllFiles() {
     filesPage.selectAllFiles();
     open.contextMenu().delete();
     deleteModalWindow.confirm();
-    assertThat(filesPage.getNumberOfFilesInList()).isEqualTo(0);
+    assertThat(filesPage.getNumberOfAllFilesOnPage()).isEqualTo(0);
   }
 }

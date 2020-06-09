@@ -44,13 +44,16 @@ public class FilesPage extends BasePage {
     refreshPage();
   }
 
-  public void selectAllFilesWhichContainText(String text) {
+  public int selectAllFilesWhichContainText(String text) {
     List<DropboxFile> list = getListOfAllFilesOnPage();
+    int counterOfFilesWithTheText = 0;
     for (DropboxFile file : list) {
       if (file.getName().contains(text)) {
+        ++counterOfFilesWithTheText;
         actions.moveToElement(file.getCheckboxLocator()).click().perform();
       }
     }
+    return counterOfFilesWithTheText;
   }
 
   public void selectAllFiles() {

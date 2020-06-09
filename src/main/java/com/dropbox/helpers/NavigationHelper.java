@@ -1,10 +1,12 @@
 package com.dropbox.helpers;
 
+import com.dropbox.pages.*;
 import com.dropbox.pages.menus.AccountMenu;
 import com.dropbox.pages.menus.CreateNewFile;
 import com.dropbox.pages.menus.PrimaryActionMenu;
 
 import static com.dropbox.App.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NavigationHelper {
 
@@ -12,45 +14,57 @@ public class NavigationHelper {
     driver.get(URL);
   }
 
-  // Pages
-  public void signInPage() {
+  /**
+   * Opening and checks of loading pages
+   */
+  public SignInPage signInPage() {
     openURL(signInPage.URL);
-    signInPage.isLoaded();
+    assertThat(signInPage.isLoaded()).isTrue();
+    return signInPage;
   }
 
-  public void homePage() {
+  public HomePage homePage() {
     openURL(homePage.URL);
-    homePage.isLoaded();
+    assertThat(homePage.isLoaded()).isTrue();
+    return homePage;
   }
 
-  public void filesPage() {
+  public FilesPage filesPage() {
     openURL(filesPage.URL);
-    filesPage.isLoaded();
+    assertThat(filesPage.isLoaded()).isTrue();
+    return filesPage;
   }
 
-  public void deletedFilesPage() {
+  public DeletedFilesPage deletedFilesPage() {
     openURL(deletedFilesPage.URL);
-    deletedFilesPage.isLoaded();
+    assertThat(deletedFilesPage.isLoaded()).isTrue();
+    return deletedFilesPage;
   }
 
-  public void settingsPage() {
+  public SettingsPage settingsPage() {
     openURL(settingsPage.URL);
-    settingsPage.isLoaded();
+    assertThat(settingsPage.isLoaded()).isTrue();
+    return settingsPage;
   }
 
-  // Menus
+  /**
+   * Opening and checks of loading menus
+   */
   public AccountMenu accountMenu() {
-    accountMenu.openMenu().isLoaded();
+    accountMenu.openMenu();
+    assertThat(accountMenu.isLoaded()).isTrue();
     return accountMenu;
   }
 
   public PrimaryActionMenu contextMenu() {
-    primaryActionMenu.openMenu().isLoaded();
+    primaryActionMenu.openMenu();
+    assertThat(primaryActionMenu.isLoaded()).isTrue();
     return primaryActionMenu;
   }
 
   public CreateNewFile createNewFileMenu() {
-    createNewFile.openMenu().isLoaded();
+    createNewFile.openMenu();
+    assertThat(createNewFile.isLoaded()).isTrue();
     return createNewFile;
   }
 }

@@ -28,7 +28,7 @@ public class SearchTests extends Launcher {
   @Flaky
   public void resultCounter() {
     search.byText("jpg");
-    assertThat(search.counterOfSearchResults()).isEqualTo(search.getNumberOfFilesInList());
+    assertThat(search.counterOfSearchResults()).isEqualTo(search.getNumberOfAllFilesOnPage());
   }
 
   @Test

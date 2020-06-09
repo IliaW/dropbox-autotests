@@ -5,11 +5,15 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.testng.annotations.Test;
 
-public class OtherTests extends Launcher {
+import static com.dropbox.App.open;
 
-  @Severity(SeverityLevel.MINOR)
+public class MoveFileTests extends Launcher {
+
   @Test
+  @Severity(SeverityLevel.MINOR)
   public void dragAndDropFileToFolder() {
+    open.filesPage();
+    //TODO
 
   }
 }

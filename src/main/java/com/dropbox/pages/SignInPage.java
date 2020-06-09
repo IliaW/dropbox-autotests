@@ -39,9 +39,9 @@ public class SignInPage extends BasePage {
    */
   public void signInAs(User user) {
     if (user.cookiesIsExist()) {
+      System.out.println("Log in with COOKIES");
       try {
-        System.out.println("Log in with COOKIES");
-        for (Cookie c : user.getCookies()) {
+        for (Cookie c : user.getSavedCookies()) {
           wd.manage().addCookie(c);
         }
         refreshPage();
@@ -54,11 +54,11 @@ public class SignInPage extends BasePage {
         e.printStackTrace();
       }
     } else {
+      System.out.println("Log in with EMAIL");
+      enter(user.getLogin(), into(EMAIL_FIELD));
+      enter(user.getPass(), into(PASSWORD_FIELD));
+      click(SIGN_IN_BUTTON);
       try {
-        System.out.println("Log in with EMAIL");
-        enter(user.getLogin(), into(EMAIL_FIELD));
-        enter(user.getPass(), into(PASSWORD_FIELD));
-        click(SIGN_IN_BUTTON);
         if (getActualErrorMessage() == null && homePage.isLoaded()) {
           user.saveCookies(wd.manage().getCookies());
         }

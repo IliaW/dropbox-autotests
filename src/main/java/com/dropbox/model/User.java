@@ -18,7 +18,7 @@ public class User {
   private File cookieFile;
 
   public User(String login, String pass) {
-    this.name = "NoName_"+ (int)(Math.random() * 9999);
+    this.name = "NoName_" + (int) (Math.random() * 9999);
     this.login = login;
     this.pass = pass;
     this.cookieFile = new File("src/main/resources/" + name + ".txt");
@@ -59,17 +59,15 @@ public class User {
     return cookieFile.exists();
   }
 
-  public Set<Cookie> getCookies() throws IOException {
+  public Set<Cookie> getSavedCookies() throws IOException {
     Set<Cookie> cookiesList = new HashSet<>();
     FileReader fr = new FileReader(cookieFile.getAbsolutePath());
     Scanner scan = new Scanner(fr);
     while (scan.hasNextLine()) {
       String line = scan.nextLine();
-      if (!line.equals("END")) {
-        String[] list = line.split(": ");
-        if (list.length == 2) {
-          cookiesList.add(new Cookie(list[0], list[1]));
-        }
+      String[] list = line.split(": ");
+      if (list.length == 2) {
+        cookiesList.add(new Cookie(list[0], list[1]));
       }
     }
     fr.close();
@@ -81,7 +79,6 @@ public class User {
     for (Cookie c : cookies) {
       fw.write(c.getName() + ": " + c.getValue() + "\n");
     }
-    fw.write("END");
     fw.close();
   }
 

@@ -35,7 +35,6 @@ public abstract class BasePage {
   // Abstract
   public abstract boolean isLoaded();
 
-  // Methods
   public WebElement find(String locator) {
     return wd.findElement(xpath(locator));
   }
@@ -78,8 +77,11 @@ public abstract class BasePage {
     wd.navigate().refresh();
   }
 
+  // Creates instances of all files on page.
   public List<DropboxFile> getListOfAllFilesOnPage() {
+    setImplicitWaitBySeconds(2);
     List<WebElement> listOfWebElements = findAll(FILE_ROW);
+    setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
     List<DropboxFile> filesList = new ArrayList<>();
     if (listOfWebElements.size() != 0) {
       for (WebElement file : listOfWebElements) {
@@ -89,10 +91,14 @@ public abstract class BasePage {
     return filesList;
   }
 
-  public int getNumberOfFilesInList() {
-    return findAll(FILE_ROW).size();
+  public int getNumberOfAllFilesOnPage() {
+    setImplicitWaitBySeconds(2);
+    int numOfFiles = findAll(FILE_ROW).size();
+    setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+    return numOfFiles;
   }
 
+  // The method waits until file downloaded, deleted, etc.
   public void actionExecution(String processing, String finish) {
     if (isDisplayed(processing)) {
       setExplicitWaitBySeconds(15);
@@ -101,7 +107,6 @@ public abstract class BasePage {
     }
   }
 
-  // Wait
   public void setImplicitWaitBySeconds(int seconds) {
     wd.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
   }
@@ -110,7 +115,6 @@ public abstract class BasePage {
     wait.withTimeout(Duration.ofSeconds(seconds));
   }
 
-  // Checks
   public boolean isDisplayed(String locator) {
     try {
       wait.until(visibilityOfElementLocated(xpath(locator)));
@@ -121,6 +125,7 @@ public abstract class BasePage {
     }
   }
 
+  // Thread wait
   public static void waitFor(int ms) {
     try {
       Thread.sleep(ms);

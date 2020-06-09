@@ -28,7 +28,7 @@ public class UploadFileTests extends Launcher {
     if (!filesPage.isLoaded()) {
       open.filesPage();
     }
-    numberOfFilesBeforeUpload = filesPage.getNumberOfFilesInList();
+    numberOfFilesBeforeUpload = filesPage.getNumberOfAllFilesOnPage();
   }
 
   @Test
@@ -39,7 +39,7 @@ public class UploadFileTests extends Launcher {
   public void uploadPictureJPG() {
     secondaryActionMenu.clickUploadFilesButton();
     filesPage.uploadFile(AIVAZOVSKY_THE_NINTH_WAVE_JPG);
-    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
+    assertThat(filesPage.getNumberOfAllFilesOnPage() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
@@ -50,7 +50,7 @@ public class UploadFileTests extends Launcher {
   public void uploadFilePDF() {
     secondaryActionMenu.clickUploadFilesButton();
     filesPage.uploadFile(HOW_GOOGLE_TESTS_PDF);
-    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
+    assertThat(filesPage.getNumberOfAllFilesOnPage() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
@@ -61,7 +61,7 @@ public class UploadFileTests extends Launcher {
   public void uploadVideoMP4() {
     secondaryActionMenu.clickUploadFilesButton();
     filesPage.uploadFile(SURPRISED_KITTY_MP4);
-    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
+    assertThat(filesPage.getNumberOfAllFilesOnPage() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
@@ -72,7 +72,7 @@ public class UploadFileTests extends Launcher {
   public void uploadEmptyFolder() {
     secondaryActionMenu.clickUploadFolderButton();
     filesPage.uploadFolder(EMPTY_FOLDER);
-    assertThat(filesPage.getNumberOfFilesInList()).isEqualTo(numberOfFilesBeforeUpload);
+    assertThat(filesPage.getNumberOfAllFilesOnPage()).isEqualTo(numberOfFilesBeforeUpload);
   }
 
   @Test
@@ -83,6 +83,6 @@ public class UploadFileTests extends Launcher {
   public void uploadFolder() {
     secondaryActionMenu.clickUploadFolderButton();
     filesPage.uploadFolder(FOLDER_WITH_3_JPG_PICTURES);
-    assertThat(filesPage.getNumberOfFilesInList() - 1).isEqualTo(numberOfFilesBeforeUpload);
+    assertThat(filesPage.getNumberOfAllFilesOnPage() - 1).isEqualTo(numberOfFilesBeforeUpload);
   }
 }
