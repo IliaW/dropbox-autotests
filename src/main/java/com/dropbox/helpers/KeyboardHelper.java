@@ -7,10 +7,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
 
-/**
- * Work with Windows file explorer.
- * Use the class if download button does not have 'input' attribute.
- */
 public class KeyboardHelper {
 
    private Robot robot;
@@ -25,12 +21,12 @@ public class KeyboardHelper {
    }
 
    private void copyTextToClipboard(File file) {
-      StringSelection stringSelection = new StringSelection(file.getAbsolutePath());
+      StringSelection stringSelection = new StringSelection((file.getAbsolutePath()));
       Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
       clipboard.setContents(stringSelection, stringSelection);
    }
 
-   private void pasteTextFromClipboard() {
+   public void pasteTextFromClipboard() {
       robot.keyPress(KeyEvent.VK_CONTROL);
       robot.keyPress(KeyEvent.VK_V);
       robot.keyRelease(KeyEvent.VK_V);
@@ -47,12 +43,16 @@ public class KeyboardHelper {
       robot.keyRelease(KeyEvent.VK_ESCAPE);
    }
 
+   public void clickBackspace() {
+      robot.keyPress(KeyEvent.VK_BACKSPACE);
+      robot.keyRelease(KeyEvent.VK_BACKSPACE);
+   }
 
    public void uploadFileFromWindowsOS(File file) {
       copyTextToClipboard(file);
       pasteTextFromClipboard();
       clickEnter();
-      clickESC();
+      //    clickESC();
    }
 
    public void uploadFolderFromWindowsOS(File file) {

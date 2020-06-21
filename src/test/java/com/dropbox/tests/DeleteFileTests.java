@@ -20,7 +20,7 @@ public class DeleteFileTests extends Launcher {
    public void setUpBeforeClass() {
       if (!accountMenu.isUserAuthorized()) {
          open.signInPage().signInAs(BASIC_USER_VOVK_ILLIA);
-         signInPage.isLoaded();
+         homePage.isLoaded();
       }
    }
 
@@ -42,7 +42,7 @@ public class DeleteFileTests extends Launcher {
    public void deleteAFewFiles() {
       filesPage.selectAllFilesWhichContainText("Aivazovsky");
       open.contextMenu().delete();
-      deleteModalWindow.confirm();
+      deleteMW.confirm();
       assertThat(filesPage.selectAllFilesWhichContainText("Aivazovsky")).isEqualTo(0);
    }
 
@@ -52,7 +52,7 @@ public class DeleteFileTests extends Launcher {
    public void deleteAllFiles() {
       filesPage.selectAllFiles();
       open.contextMenu().delete();
-      deleteModalWindow.confirm();
+      deleteMW.confirm();
       assertThat(filesPage.getNumberOfAllFilesOnPage()).isEqualTo(0);
    }
 }

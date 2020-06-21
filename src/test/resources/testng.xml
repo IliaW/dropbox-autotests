@@ -6,8 +6,11 @@
         <classes>
             <class name="com.dropbox.tests.SignInTests"/>
             <class name="com.dropbox.tests.UploadFileTests"/>
+            <class name="com.dropbox.tests.CreateFileTests"/>
             <class name="com.dropbox.tests.SearchTests"/>
             <class name="com.dropbox.tests.DeleteFileTests"/>
+<!--            <class name="com.dropbox.tests.MoveFileTests"/>-->
+            <class name="com.dropbox.tests.SettingsTest"/>
             <class name="com.dropbox.tests.SignOutTests"/>
         </classes>
     </test>

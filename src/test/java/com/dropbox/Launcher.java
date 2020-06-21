@@ -16,6 +16,7 @@ public class Launcher {
       app.init(CHROME);
    }
 
+
    @AfterSuite(alwaysRun = true)
    public void tearDown() {
       app.stop();

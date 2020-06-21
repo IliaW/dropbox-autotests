@@ -11,13 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * 3. Choose files and click OK
  */
 
-public class UploadToModalWindow extends BasePage implements ModalWindow {
+public class UploadToMW extends BasePage implements ModalWindow {
 
    private final String UPLOAD_TO_HEADER = "//div[contains(@class,'modal-header') and text() = 'Upload to…']";
    private final String UPLOAD_BUTTON = "//button/span[text() = 'Upload']";
    private final String CANCEL_BUTTON = "//button/span[text() = 'Cancel']";
 
-   public UploadToModalWindow(WebDriver wd, WebDriverWait wait) {
+   public UploadToMW(WebDriver wd, WebDriverWait wait) {
       super(wd, wait);
    }
 

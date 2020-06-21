@@ -2,7 +2,7 @@ package com.dropbox.helpers;
 
 import com.dropbox.pages.*;
 import com.dropbox.pages.menus.AccountMenu;
-import com.dropbox.pages.menus.CreateNewFile;
+import com.dropbox.pages.menus.CreateNewFileMenu;
 import com.dropbox.pages.menus.PrimaryActionMenu;
 
 import static com.dropbox.App.*;
@@ -62,7 +62,7 @@ public class NavigationHelper {
       return primaryActionMenu;
    }
 
-   public CreateNewFile createNewFileMenu() {
+   public CreateNewFileMenu createNewFileMenu() {
       createNewFile.openMenu();
       assertThat(createNewFile.isLoaded()).isTrue();
       return createNewFile;

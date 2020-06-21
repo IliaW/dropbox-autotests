@@ -1,12 +1,9 @@
 package com.dropbox.pages.other;
 
 import com.dropbox.helpers.KeyboardHelper;
-import com.dropbox.model.DropboxFile;
 import com.dropbox.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -32,7 +29,7 @@ public class Search extends BasePage {
 
    public void byText(String text) {
       click(SEARCH_FIELD);
-      this.isLoaded();
+      isLoaded();
       enter(text, into(SEARCH_FIELD));
       waitFor(1000);
       keyboardHelper.clickEnter();
@@ -49,15 +46,5 @@ public class Search extends BasePage {
       return isDisplayed(NO_RESULTS_FOUND);
    }
 
-   public boolean resultsContain(String request) {
-      setImplicitWaitBySeconds(0);
-      List<DropboxFile> dropboxFiles = getListOfAllFilesOnPage();
-      setImplicitWaitBySeconds(4);
-      for (DropboxFile resultOfSearch : dropboxFiles) {
-         if (resultOfSearch.getName().toLowerCase().contains(request.toLowerCase())) {
-            return true;
-         }
-      }
-      return false;
-   }
+
 }

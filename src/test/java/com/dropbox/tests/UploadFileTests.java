@@ -21,7 +21,7 @@ public class UploadFileTests extends Launcher {
    public void setUpBeforeClass() {
       if (!accountMenu.isUserAuthorized()) {
          open.signInPage().signInAs(BASIC_USER_VOVK_ILLIA);
-         signInPage.isLoaded();
+         homePage.isLoaded();
       }
    }
 

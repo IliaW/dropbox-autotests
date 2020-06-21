@@ -24,4 +24,7 @@ public class FilesData {
 
    public static final File EMPTY_FOLDER =
            new File("src/main/resources/", "Empty Folder");
+
+   public static final File ACCOUNT_PHOTO =
+           new File("src/main/resources/", "account_photo.jpeg");
 }

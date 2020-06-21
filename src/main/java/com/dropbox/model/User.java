@@ -17,20 +17,22 @@ public class User {
    private String pass;
    private File cookieFile;
 
+   private final String fileFormat = ".txt";
+
    private final String pathToFile = "src/main/resources/";
 
    public User(String login, String pass) {
       this.name = "NoName_" + (int) (Math.random() * 9999);
       this.login = login;
       this.pass = pass;
-      this.cookieFile = new File(pathToFile + name + ".txt");
+      this.cookieFile = new File(pathToFile + name + fileFormat);
    }
 
    public User(String name, String login, String pass) {
       this.name = name;
       this.login = login;
       this.pass = pass;
-      this.cookieFile = new File(pathToFile + name + ".txt");
+      this.cookieFile = new File(pathToFile + name + fileFormat);
    }
 
    public String getLogin() {
@@ -63,8 +65,8 @@ public class User {
 
    public Set<Cookie> getSavedCookies() throws IOException {
       Set<Cookie> cookiesList = new HashSet<>();
-      FileReader fr = new FileReader(cookieFile.getAbsolutePath());
-      Scanner scan = new Scanner(fr);
+      FileReader fileReader = new FileReader(cookieFile.getAbsolutePath());
+      Scanner scan = new Scanner(fileReader);
       while (scan.hasNextLine()) {
          String line = scan.nextLine();
          String[] list = line.split(": ");
@@ -72,16 +74,16 @@ public class User {
             cookiesList.add(new Cookie(list[0], list[1]));
          }
       }
-      fr.close();
+      fileReader.close();
       return cookiesList;
    }
 
    public void saveCookies(Set<Cookie> cookies) throws IOException {
-      FileWriter fw = new FileWriter(pathToFile + name + "'s_cookie.txt");
+      FileWriter fileWriter = new FileWriter(pathToFile + name + fileFormat);
       for (Cookie c : cookies) {
-         fw.write(c.getName() + ": " + c.getValue() + "\n");
+         fileWriter.write(c.getName() + ": " + c.getValue() + "\n");
       }
-      fw.close();
+      fileWriter.close();
    }
 
    public void deleteCookiesFile() {

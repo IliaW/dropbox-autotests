@@ -1,12 +1,13 @@
 package com.dropbox.pages;
 
-import com.dropbox.helpers.KeyboardHelper;
 import com.dropbox.model.DropboxFile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.util.List;
+
+import static com.dropbox.App.keyboard;
 
 public class FilesPage extends BasePage {
 
@@ -18,11 +19,8 @@ public class FilesPage extends BasePage {
    private final String UPLOADING_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploading')]";
    private final String UPLOADED_SNACKBAR = "//p[@class ='mc-snackbar-title' and contains(text(),'Uploaded')]";
 
-   private final KeyboardHelper keyboardHelper;
-
    public FilesPage(WebDriver wd, WebDriverWait wait) {
       super(wd, wait);
-      keyboardHelper = new KeyboardHelper();
    }
 
    @Override
@@ -32,14 +30,14 @@ public class FilesPage extends BasePage {
 
    public void uploadFile(File file) {
       waitFor(600);
-      keyboardHelper.uploadFileFromWindowsOS(file);
+      keyboard.uploadFileFromWindowsOS(file);
       actionExecution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
       refreshPage();
    }
 
    public void uploadFolder(File folder) {
       waitFor(600);
-      keyboardHelper.uploadFolderFromWindowsOS(folder);
+      keyboard.uploadFolderFromWindowsOS(folder);
       actionExecution(UPLOADING_SNACKBAR, UPLOADED_SNACKBAR);
       refreshPage();
    }

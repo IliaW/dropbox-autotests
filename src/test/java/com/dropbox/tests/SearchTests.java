@@ -20,7 +20,7 @@ public class SearchTests extends Launcher {
    public void setUpBeforeTest() {
       if (!accountMenu.isUserAuthorized()) {
          open.signInPage().signInAs(BASIC_USER_VOVK_ILLIA);
-         signInPage.isLoaded();
+         homePage.isLoaded();
       }
       open.homePage();
    }
@@ -30,6 +30,7 @@ public class SearchTests extends Launcher {
       takeScreenshot();
    }
 
+   // remove cookie file in resources if failed
    @Test
    @Flaky // When searching, sometimes system logout.
    @Feature("Search")
@@ -45,7 +46,7 @@ public class SearchTests extends Launcher {
    public void checkResultsForComplianceWithRequest() {
       String searchRequest = "jpg";
       search.byText(searchRequest);
-      assertThat(search.resultsContain(searchRequest)).isTrue();
+      assertThat(search.listContainsFile(searchRequest)).isTrue();
    }
 
    @Test
