@@ -63,7 +63,7 @@ public class SettingsTest extends Launcher {
       };
    }
 
-   // If test failed, remove cookie file from resources.
+   // If test failed, remove cookie file from src\main\resources.
    @Test
    @Flaky
    @Feature("Settings")

@@ -78,12 +78,12 @@ public class App {
       primaryActionMenu = new PrimaryActionMenu(driver, wait);
       secondaryActionMenu = new SecondaryActionMenu(driver, wait);
 
-      addAccountPhotoMW = new AddAccountPhotoMW(driver,wait);
-      changeYourNameMW = new ChangeYourNameMW(driver,wait);
-      createFolderMW = new CreateFolderMW(driver,wait);
-      createShortcutMW = new CreateShortcutMW(driver,wait);
+      addAccountPhotoMW = new AddAccountPhotoMW(driver, wait);
+      changeYourNameMW = new ChangeYourNameMW(driver, wait);
+      createFolderMW = new CreateFolderMW(driver, wait);
+      createShortcutMW = new CreateShortcutMW(driver, wait);
       deleteMW = new DeleteMW(driver, wait);
-      uploadToMW = new UploadToMW(driver,wait);
+      uploadToMW = new UploadToMW(driver, wait);
 
       search = new Search(driver, wait);
       open = new NavigationHelper();

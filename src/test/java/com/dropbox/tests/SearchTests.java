@@ -26,6 +26,11 @@ public class SearchTests extends Launcher {
       open.homePage();
    }
 
+   @BeforeMethod
+   public void setUpBeforeMethod(){
+      open.homePage();
+   }
+
    @AfterMethod
    public void tearDownAfterMethod(){
       takeScreenshot();
@@ -36,7 +41,7 @@ public class SearchTests extends Launcher {
    @Feature("Search")
    @Severity(SeverityLevel.MINOR)
    public void resultCounter() {
-      search.byText("jpg");
+      search.byText("Google");
       assertThat(search.counterOfSearchResults()).isEqualTo(search.getNumberOfAllFilesOnPage());
    }
 

@@ -45,6 +45,9 @@ public class AddAccountPhotoMW extends BasePage implements ModalWindow {
    }
 
    public String successUploadText(){
-      return find(SUCCESS_UPLOAD_TEXT).getText();
+      setImplicitWaitBySeconds(8);
+      String successText = find(SUCCESS_UPLOAD_TEXT).getText();
+      setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
+      return successText;
    }
 }

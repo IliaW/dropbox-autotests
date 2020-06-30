@@ -4,7 +4,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
-import static org.openqa.selenium.remote.BrowserType.CHROME;
 
 public class Launcher {
 
@@ -16,6 +15,11 @@ public class Launcher {
       app.init(browser);
    }
 
+// Use for debug
+//   @BeforeSuite
+//   public void setUp() {
+//      app.init("chrome");
+//   }
 
    @AfterSuite(alwaysRun = true)
    public void tearDown() {

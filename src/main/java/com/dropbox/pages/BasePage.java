@@ -98,7 +98,7 @@ public abstract class BasePage {
    }
 
    public int getNumberOfAllFilesOnPage() {
-      setImplicitWaitBySeconds(1);
+      setImplicitWaitBySeconds(2);
       int numberOfFiles = findAll(FILE_ROW).size();
       setImplicitWaitBySeconds(DEFAULT_IMPLICIT_WAIT);
       return numberOfFiles;
