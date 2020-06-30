@@ -1,4 +1,14 @@
-<h3 align="left">
-  <p>About</p>
-</h3>
-<p>Selenium-Java-TestNG-Maven-Allure <br>
+### About
+- Selenium
+- Java 1.8
+- TestNG
+- Maven
+- Allure
+  
+### Environment
+- Windows 10 x64
+  
+### How to run
+```sh
+mvn test
+```
