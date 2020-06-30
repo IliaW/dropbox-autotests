@@ -84,7 +84,7 @@ public abstract class BasePage {
 
    // Creates instances of all files on page.
    public List<DropboxFile> getListOfAllFilesOnPage() {
-      waitFor(2000);
+      waitFor(2500);
       setImplicitWaitBySeconds(0);
       List<WebElement> listOfWebElements = findAll(FILE_ROW);
       List<DropboxFile> filesList = new ArrayList<>();

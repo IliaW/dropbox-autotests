@@ -22,6 +22,7 @@ public class CreateFileTests extends Launcher {
          open.signInPage().signInAs(BASIC_USER_VOVK_ILLIA);
          homePage.isLoaded();
       }
+      open.filesPage();
    }
 
    @BeforeMethod
