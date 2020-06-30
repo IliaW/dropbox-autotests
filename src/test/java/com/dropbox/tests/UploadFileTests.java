@@ -66,7 +66,7 @@ public class UploadFileTests extends Launcher {
       assertThat(filesPage.getNumberOfAllFilesOnPage() - 1).isEqualTo(numberOfFilesBeforeUpload);
    }
 
-   @Test
+   @Test(enabled = false)
    @Feature("Upload files")
    @Severity(SeverityLevel.CRITICAL)
    public void uploadEmptyFolder() {
